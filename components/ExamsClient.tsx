@@ -64,7 +64,7 @@ export default function ExamsClient() {
       {/* Hero Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4 py-6">
         <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white glow-text">
-          Sarkari<span className="text-indigo-600 dark:text-indigo-400">HQ</span> Exam Directory
+          Naukari<span className="text-indigo-600 dark:text-indigo-400">Tools</span> Exam Directory
         </h1>
         <p className="text-sm sm:text-base text-slate-500 dark:text-zinc-400 leading-relaxed">
           Find and launch eligibility tools, photo resizers, and document tools for all {examsList.length} Indian recruitment exams.
