@@ -1,0 +1,31 @@
+"use client";
+
+import React from "react";
+
+export default function AdBanner() {
+  const adPublisherId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+
+  return (
+    <div className="w-full max-w-7xl mx-auto my-6 px-4">
+      <div className="glass-card rounded-2xl p-4 border border-white/5 bg-white/[0.01] flex flex-col items-center justify-center min-h-[90px] relative overflow-hidden">
+        {/* Sponsored tag overlay */}
+        <span className="absolute top-2 right-3 text-[9px] font-bold uppercase tracking-wider text-zinc-500 bg-zinc-950 px-1.5 py-0.5 rounded border border-white/5">
+          Sponsored
+        </span>
+
+        {adPublisherId ? (
+          // Injected Ad block placeholder
+          <div className="text-center text-xs text-zinc-500 font-mono tracking-wide">
+            AdUnit Slot: (ca-pub-{adPublisherId})
+          </div>
+        ) : (
+          // Dynamic supportive message matching Vercel theme
+          <div className="text-center space-y-1">
+            <div className="text-xs font-semibold text-zinc-400">Naukari Tools Core Free Utilities</div>
+            <p className="text-[10px] text-zinc-500">Processed locally in-browser. Clean. Ad-free. Privacy guaranteed.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
