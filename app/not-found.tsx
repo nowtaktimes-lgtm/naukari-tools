@@ -4,7 +4,7 @@ import { ArrowLeft, AlertTriangle } from "lucide-react";
 import { routes } from "@/config/routes";
 
 export const metadata = {
-  title: "404 - Page Not Found | Naukari Tools",
+  title: "404 - Page Not Found",
   description: "The requested utility could not be found. Return to Naukari Tools Government Utility Hub.",
 };
 

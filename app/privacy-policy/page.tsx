@@ -3,6 +3,11 @@ import Link from "next/link";
 import { ArrowLeft, Shield, Lock, Cpu, EyeOff } from "lucide-react";
 import { routes } from "@/config/routes";
 
+export const metadata = {
+  title: "Privacy Policy",
+  description: "Understand our privacy practices. Naukari Tools operates local-first inside your browser with zero server file uploads.",
+};
+
 export default function PrivacyPolicyPage() {
   const schema = {
     "@context": "https://schema.org",

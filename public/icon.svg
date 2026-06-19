@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Pointy-topped solid Navy Blue hexagon -->
+  <polygon points="256,16 464,136 464,376 256,496 48,376 48,136" fill="#1E3A8A" />
+  
+  <!-- Bold white letter 'N' centered precisely -->
+  <text 
+    x="256" 
+    y="345" 
+    font-family="system-ui, -apple-system, sans-serif" 
+    font-weight="900" 
+    font-size="260" 
+    fill="#FFFFFF" 
+    text-anchor="middle"
+  >N</text>
+</svg>

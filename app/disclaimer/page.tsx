@@ -3,6 +3,11 @@ import Link from "next/link";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
 import { routes } from "@/config/routes";
 
+export const metadata = {
+  title: "Disclaimer",
+  description: "Read the official disclaimer for Naukari Tools. Learn about our independent educational status and data verification policies.",
+};
+
 export default function DisclaimerPage() {
   const schema = {
     "@context": "https://schema.org",

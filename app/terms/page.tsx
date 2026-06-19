@@ -3,6 +3,11 @@ import Link from "next/link";
 import { ArrowLeft, Scale, ShieldAlert, Cpu } from "lucide-react";
 import { routes } from "@/config/routes";
 
+export const metadata = {
+  title: "Terms of Service",
+  description: "Read our terms of service. Understand user permissions, sandbox calculations, and liability limitations when using Naukari Tools.",
+};
+
 export default function TermsPage() {
   const schema = {
     "@context": "https://schema.org",

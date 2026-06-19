@@ -33,9 +33,82 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tool = toolsList.find((t) => t.slug === params.slug);
   const exam = (examsData as ExamSEODB[]).find((e) => e.slug === params.slug);
 
+  function formatExamNameForTitle(name: string): string {
+    // Suffix: " Photo Resizer & Age Check (Strict Rules)" is 41 characters
+    // Max length for exam name: 59 - 41 = 18 characters.
+    const maxLen = 18;
+    let formatted = name;
+    const abbreviations: Record<string, string> = {
+      "Rajasthan Eligibility Examination for Teachers": "REET Exam",
+      "Central Teacher Eligibility Test": "CTET Exam",
+      "UPSC National Defence Academy": "UPSC NDA",
+      "UPSC Combined Defence Services": "UPSC CDS",
+      "SSC Central Police Organization": "SSC CPO",
+      "Air Force Common Admission Test": "AFCAT",
+      "SBI Junior Associates": "SBI JA",
+      "RBI Grade B Officer": "RBI Grade B",
+      "LIC Apprentice Development Officer": "LIC ADO",
+      "LIC Assistant Administrative Officer": "LIC AAO",
+      "NIACL Administrative Officer": "NIACL AO",
+      "UP Teacher Eligibility Test": "UPTET Exam",
+      "Haryana Teacher Eligibility Test": "HTET Exam",
+      "Rajasthan Administrative Service": "RAS Exam",
+      "Provincial Civil Services": "PCS Exam",
+      "Combined Competitive Exam": "CCE Exam",
+      "KVS Primary Teacher": "KVS PRT",
+      "KVS Post Graduate Teacher": "KVS PGT",
+      "NVS Trained Graduate Teacher": "NVS TGT",
+      "DSSSB Primary Teacher": "DSSSB PRT",
+      "DSSSB Trained Graduate Teacher": "DSSSB TGT",
+    };
+
+    for (const [key, value] of Object.entries(abbreviations)) {
+      if (formatted.includes(key)) {
+        formatted = formatted.replace(key, value);
+      }
+    }
+
+    if (formatted.length > maxLen) {
+      formatted = formatted.substring(0, maxLen - 3) + "...";
+    }
+    return formatted;
+  }
+
+  function formatExamNameForDescription(name: string): string {
+    // Suffix/prefix static parts:
+    // "Prevent form rejection! Auto-resize " (36)
+    // " photo to strict 50KB & check age eligibility. 100% Free & Zero Server Uploads." (79)
+    // Total static: 115.
+    // We need the middle part to be between 25 and 40 characters: 140 <= 115 + L <= 155 => 25 <= L <= 40.
+    let formatted = name;
+
+    if (formatted.length < 25) {
+      const expansions = [
+        " recruitment exam",
+        " official application",
+        " recruitment portal",
+        " online form",
+      ];
+      for (const exp of expansions) {
+        if (formatted.length + exp.length <= 40) {
+          formatted += exp;
+        }
+        if (formatted.length >= 25 && formatted.length <= 40) {
+          break;
+        }
+      }
+      while (formatted.length < 25) {
+        formatted += " exam";
+      }
+    } else if (formatted.length > 40) {
+      formatted = formatted.substring(0, 37) + "...";
+    }
+    return formatted;
+  }
+
   if (tool) {
     return {
-      title: `${tool.name} | Naukari Tools`,
+      title: `${tool.name}`,
       description: tool.description,
       metadataBase: new URL("https://naukaritools.in"),
       robots: {
@@ -53,7 +126,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     if (isLocked) {
       return {
-        title: `Scheduled Release - ${exam.examName} | Naukari Tools`,
+        title: {
+          absolute: `Scheduled Release - ${exam.examName}`,
+        },
         description: `The eligibility dashboard for ${exam.examName} is scheduled for release on ${exam.releaseDate}.`,
         robots: {
           index: false,
@@ -62,9 +137,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       };
     }
 
+    const titleName = formatExamNameForTitle(exam.examName);
+    const descName = formatExamNameForDescription(exam.examName);
+
     return {
-      title: `${exam.examName} Photo Resizer & Age Calculator - ${exam.photoMaxKb}KB`,
-      description: `Official ${exam.examBoard} ${exam.examName} photo and signature maker. Auto-resize to ${exam.photoDimensions} under ${exam.photoMaxKb}KB.`,
+      title: {
+        absolute: `${titleName} Photo Resizer & Age Check (Strict Rules)`,
+      },
+      description: `Prevent form rejection! Auto-resize ${descName} photo to strict 50KB & check age eligibility. 100% Free & Zero Server Uploads.`,
       metadataBase: new URL("https://naukaritools.in"),
       robots: {
         index: true,
@@ -72,8 +152,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         "max-image-preview": "large",
       },
       openGraph: {
-        title: `${exam.examName} Photo Resizer & Age Calculator - ${exam.photoMaxKb}KB`,
-        description: `Official ${exam.examBoard} ${exam.examName} photo and signature maker. Auto-resize to ${exam.photoDimensions} under ${exam.photoMaxKb}KB.`,
+        title: `${titleName} Photo Resizer & Age Check (Strict Rules)`,
+        description: `Prevent form rejection! Auto-resize ${descName} photo to strict 50KB & check age eligibility. 100% Free & Zero Server Uploads.`,
         images: [
           {
             url: `/og-image-cover.jpg`, // High-res cover image URL
@@ -85,16 +165,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
       twitter: {
         card: "summary_large_image",
-        title: `${exam.examName} Photo Resizer & Age Calculator - ${exam.photoMaxKb}KB`,
-        description: `Official ${exam.examBoard} ${exam.examName} photo and signature maker. Auto-resize to ${exam.photoDimensions} under ${exam.photoMaxKb}KB.`,
+        title: `${titleName} Photo Resizer & Age Check (Strict Rules)`,
+        description: `Prevent form rejection! Auto-resize ${descName} photo to strict 50KB & check age eligibility. 100% Free & Zero Server Uploads.`,
         images: [`/og-image-cover.jpg`],
       },
     };
   }
 
   return {
-    title: "Government Job Utility Hub | Naukari Tools",
-    description: "Access verified calculators and photo resizers.",
+    title: {
+      absolute: "Government Exam Form Resizer | Prevent Rejection",
+    },
+    description: "Prevent form rejection! Auto-resize your exam photos and check exact age eligibility according to official notification rules. 100% Free.",
   };
 }
 

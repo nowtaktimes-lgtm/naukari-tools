@@ -15,9 +15,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Naukari Tools | Government Job Utility Hub",
+  title: {
+    template: "%s | Naukari Tools",
+    default: "Naukari Tools | Elite Government Job Utilities",
+  },
   description: "Elite, high-trust utility software suite for government job aspirants. Compute precise age relaxation, check exam eligibility, and track your prep path in a premium Bento workspace.",
   metadataBase: new URL("https://naukaritools.in"),
+  icons: {
+    icon: "/icon.svg",
+  },
   openGraph: {
     title: "Naukari Tools | Government Job Utility Hub",
     description: "Elite, high-trust utility software suite for government job aspirants. Precise age calculator, salary estimator, and exam trackers.",

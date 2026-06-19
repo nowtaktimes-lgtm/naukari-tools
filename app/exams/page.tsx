@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import ExamsClient from "@/components/ExamsClient";
 
 export const metadata: Metadata = {
-  title: "All Government Exams Directory | Naukari Tools",
-  description: "Browse the comprehensive directory of central and state government recruitment exams. Get exact calculations for age limits, relaxations, photo resizing templates, and marks eligibility constraints.",
+  title: "All Government Exams",
+  description: "Directory of central and state government recruitment exams. Access custom age limits, relaxation rules, and document resizing templates.",
 };
 
 export default function ExamsPage() {

@@ -4,7 +4,7 @@ import { ArrowLeft, Shield, Cpu, Lock, CheckCircle2 } from "lucide-react";
 import { routes } from "@/config/routes";
 
 export const metadata = {
-  title: "About | Naukari Tools",
+  title: "About",
   description: "Learn about Naukari Tools - the high-trust, minimalist, local-first utility workspace for civil service candidates.",
 };
 
