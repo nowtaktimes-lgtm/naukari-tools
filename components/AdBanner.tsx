@@ -1,9 +1,32 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function AdBanner() {
   const adPublisherId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+
+  useEffect(() => {
+    // Inject MoneTag Vignette script (zone: 11177397)
+    const scriptId = "monetag-vignette-ad";
+    const existingScript = document.getElementById(scriptId);
+
+    if (!existingScript) {
+      try {
+        const script = document.createElement("script");
+        script.id = scriptId;
+        script.src = "https://n6wxm.com/vignette.min.js";
+        script.dataset.zone = "11177397";
+        
+        // Append script to document body or root html element
+        const target = [document.documentElement, document.body].filter(Boolean).pop();
+        if (target) {
+          target.appendChild(script);
+        }
+      } catch (err) {
+        console.error("Failed to load MoneTag Vignette script:", err);
+      }
+    }
+  }, []);
 
   return (
     <div className="w-full max-w-7xl mx-auto my-6 px-4">
@@ -21,8 +44,8 @@ export default function AdBanner() {
         ) : (
           // Dynamic supportive message matching Vercel theme
           <div className="text-center space-y-1">
-            <div className="text-xs font-semibold text-zinc-400">Naukari Tools Core Free Utilities</div>
-            <p className="text-[10px] text-zinc-500">Processed locally in-browser. Clean. Ad-free. Privacy guaranteed.</p>
+            <div className="text-xs font-semibold text-zinc-450">Naukari Tools Core Free Utilities</div>
+            <p className="text-[10px] text-zinc-550">Processed locally in-browser. Clean. Ad-free. Privacy guaranteed.</p>
           </div>
         )}
       </div>
