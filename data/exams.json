@@ -1511,5 +1511,33 @@
     "photoDimensions": "200x230 px",
     "signatureMaxKb": 20,
     "signatureDimensions": "140x60 px"
+  },
+  {
+    "slug": "rrb-technician-2026",
+    "examName": "RRB Technician 2026",
+    "examBoard": "RRB",
+    "releaseDate": "2026-06-30",
+    "generalMinAge": 18,
+    "generalMaxAge": 30,
+    "obcRelaxationYears": 3,
+    "scstRelaxationYears": 5,
+    "photoMaxKb": 50,
+    "photoDimensions": "200x230 px",
+    "signatureMaxKb": 20,
+    "signatureDimensions": "140x60 px"
+  },
+  {
+    "slug": "hssc-group-d-2026",
+    "examName": "HSSC Group D 2026",
+    "examBoard": "HSSC",
+    "releaseDate": "2026-06-18",
+    "generalMinAge": 18,
+    "generalMaxAge": 42,
+    "obcRelaxationYears": 5,
+    "scstRelaxationYears": 5,
+    "photoMaxKb": 50,
+    "photoDimensions": "350x450 px",
+    "signatureMaxKb": 20,
+    "signatureDimensions": "140x60 px"
   }
 ]
