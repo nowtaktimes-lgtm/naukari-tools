@@ -192,44 +192,11 @@ export default function ToolPage({ params }: Props) {
   const isLocked = isExam && today < new Date(exam.releaseDate);
   const exists = !!tool || (isExam && !isLocked);
 
-  // JSON-LD Schema Script (SoftwareApplication type)
-  const jsonLd = exam ? {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": `${exam.examName} Photo Resizer and Age Calculator`,
-    "applicationCategory": "EducationalApplication, Utility",
-    "operatingSystem": "Web, Windows, iOS, Android",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "INR"
-    },
-    "description": `Official ${exam.examBoard} photo and signature maker for ${exam.examName}.`
-  } : tool ? {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": `${tool.name} Photo Resizer and Age Calculator`,
-    "applicationCategory": "EducationalApplication, Utility",
-    "operatingSystem": "Web, Windows, iOS, Android",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "INR"
-    },
-    "description": tool.description
-  } : null;
-
   // If locked or doesn't exist, load fallback banner and render custom master resizer
   if (!exists) {
     const releaseDateStr = exam?.releaseDate || "a future date";
     return (
       <div className="max-w-7xl mx-auto space-y-8 py-8 px-4">
-        {jsonLd && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          />
-        )}
         {/* Back Link */}
         <Link href={routes.home} className="inline-flex items-center space-x-2 text-xs text-slate-500 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors group">
           <ArrowLeft className="h-3.5 w-3.5 transform group-hover:-translate-x-0.5 transition-transform" />
@@ -267,6 +234,12 @@ export default function ToolPage({ params }: Props) {
 
         {/* Dynamic SEO text & disclaimers */}
         <SemanticSEOText exam={null} />
+        <FAQSection exam={exam || null} />
+        <RatingWidget 
+          name={exam ? `${exam.examName} Photo Resizer and Age Calculator` : "Government Exam Form Resizer"} 
+          pageType="SoftwareApplication" 
+          description={exam ? `Official ${exam.examBoard} photo and signature maker for ${exam.examName}.` : "Prevent form rejection! Auto-resize your exam photos and check exact age eligibility."} 
+        />
 
         {/* Ad Banner 2 */}
         <AdBanner />
