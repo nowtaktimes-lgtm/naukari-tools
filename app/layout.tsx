@@ -38,14 +38,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`} suppressHydrationWarning>
-      <head>
-        {/* MoneTag Vignette Ad Verification Script */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(s){s.dataset.zone='11177397',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
-          }}
-        />
-      </head>
       <body className="bg-slate-50 text-slate-900 dark:bg-[#0A0A0A] dark:text-[#F5F5F5] min-h-screen antialiased flex flex-col justify-between selection:bg-indigo-500/30 selection:text-white transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {/* Global Organization Schema */}

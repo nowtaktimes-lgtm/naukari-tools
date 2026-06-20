@@ -1,32 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 
 export default function AdBanner() {
   const adPublisherId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
 
-  useEffect(() => {
-    // Inject MoneTag Ad Script (zone: 11177455)
-    const scriptId = "monetag-inpage-ad";
-    const existingScript = document.getElementById(scriptId);
-
-    if (!existingScript) {
-      try {
-        const script = document.createElement("script");
-        script.id = scriptId;
-        script.src = "https://nap5k.com/tag.min.js";
-        script.dataset.zone = "11177455";
-        
-        // Append script to document body or root html element
-        const target = [document.documentElement, document.body].filter(Boolean).pop();
-        if (target) {
-          target.appendChild(script);
-        }
-      } catch (err) {
-        console.error("Failed to load MoneTag In-Page ad script:", err);
-      }
-    }
-  }, []);
 
   return (
     <div className="w-full max-w-7xl mx-auto my-6 px-4">
