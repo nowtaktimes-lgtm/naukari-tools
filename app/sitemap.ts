@@ -52,20 +52,11 @@ function getStaticRoutes(dir: string, baseRoute = ""): string[] {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Reference system current time (2026-06-15)
-  const today = new Date("2026-06-15T00:00:00+05:30");
   const exams = examsData as ExamSEODB[];
-
-  // Filter active exams
-  const activeExams = exams.filter((exam) => {
-    const releaseDate = new Date(exam.releaseDate);
-    return today >= releaseDate;
-  });
-
   const baseUrl = "https://naukaritools.in";
 
-  // 1. Dynamic exam URLs
-  const examUrls = activeExams.map((exam) => ({
+  // 1. Dynamic exam URLs (All exams are included to allow pre-indexing of upcoming resources)
+  const examUrls = exams.map((exam) => ({
     url: `${baseUrl}/tools/${exam.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
