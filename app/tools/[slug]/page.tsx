@@ -13,6 +13,8 @@ import SyllabusTracker from "@/components/SyllabusTracker";
 import TrustBadges from "@/components/TrustBadges";
 import SemanticSEOText from "@/components/SemanticSEOText";
 import AdBanner from "@/components/AdBanner";
+import RatingWidget from "@/components/RatingWidget";
+import FAQSection from "@/components/FAQSection";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
 
 interface Props {
@@ -277,12 +279,6 @@ export default function ToolPage({ params }: Props) {
   if (tool) {
     return (
       <div className="max-w-7xl mx-auto space-y-8 py-8 px-4">
-        {jsonLd && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          />
-        )}
         <Link href={routes.home} className="inline-flex items-center space-x-2 text-xs text-slate-500 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors group">
           <ArrowLeft className="h-3.5 w-3.5 transform group-hover:-translate-x-0.5 transition-transform" />
           <span>Back to Utility Hub</span>
@@ -313,6 +309,8 @@ export default function ToolPage({ params }: Props) {
           </div>
         </div>
         <SemanticSEOText exam={null} />
+        <FAQSection tool={tool} />
+        <RatingWidget name={tool.name} pageType="SoftwareApplication" description={tool.description} />
 
         {/* Ad Banner 2 */}
         <AdBanner />
@@ -327,13 +325,6 @@ export default function ToolPage({ params }: Props) {
   // Render pre-populated Active Exam Dashboard
   return (
     <div className="max-w-7xl mx-auto space-y-8 py-8 px-4">
-      {/* JSON-LD Schema injection */}
-      {jsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      )}
 
       {/* Back button */}
       <Link href={routes.home} className="inline-flex items-center space-x-2 text-xs text-slate-500 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors group">
@@ -384,6 +375,8 @@ export default function ToolPage({ params }: Props) {
 
       {/* Semantic SEO Text Panel */}
       <SemanticSEOText exam={exam} />
+      <FAQSection exam={exam} />
+      <RatingWidget name={`${exam.examName} Photo Resizer and Age Calculator`} pageType="SoftwareApplication" description={`Official ${exam.examBoard} photo and signature maker for ${exam.examName}.`} />
 
       {/* Ad Banner 2 */}
       <AdBanner />

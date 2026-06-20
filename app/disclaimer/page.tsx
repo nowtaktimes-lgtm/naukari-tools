@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
 import { routes } from "@/config/routes";
+import RatingWidget from "@/components/RatingWidget";
+import FAQSection from "@/components/FAQSection";
 
 export const metadata = {
   title: "Disclaimer",
@@ -80,6 +82,8 @@ export default function DisclaimerPage() {
           </p>
         </section>
       </div>
+      <FAQSection path="/disclaimer" />
+      <RatingWidget name="Disclaimer - Naukari Tools" pageType="WebPage" description="Read the official disclaimer for Naukari Tools. Learn about our independent educational status and data verification policies." />
     </div>
   );
 }

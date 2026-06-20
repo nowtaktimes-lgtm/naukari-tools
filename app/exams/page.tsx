@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import ExamsClient from "@/components/ExamsClient";
+import RatingWidget from "@/components/RatingWidget";
+import FAQSection from "@/components/FAQSection";
 
 export const metadata: Metadata = {
   title: "All Government Exams",
@@ -22,6 +24,8 @@ export default function ExamsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <ExamsClient />
+      <FAQSection path="/exams" />
+      <RatingWidget name="All Government Exams Directory" pageType="WebPage" description="Directory of central and state government recruitment exams. Access custom age limits, relaxation rules, and document resizing templates." />
     </>
   );
 }

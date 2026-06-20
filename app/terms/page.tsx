@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft, Scale, ShieldAlert, Cpu } from "lucide-react";
 import { routes } from "@/config/routes";
+import RatingWidget from "@/components/RatingWidget";
+import FAQSection from "@/components/FAQSection";
 
 export const metadata = {
   title: "Terms of Service",
@@ -73,6 +75,8 @@ export default function TermsPage() {
           </p>
         </section>
       </div>
+      <FAQSection path="/terms" />
+      <RatingWidget name="Terms of Service - Naukari Tools" pageType="WebPage" description="Read our terms of service. Understand user permissions, sandbox calculations, and liability limitations when using Naukari Tools." />
     </div>
   );
 }

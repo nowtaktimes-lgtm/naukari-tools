@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft, Shield, Cpu, Lock, CheckCircle2 } from "lucide-react";
 import { routes } from "@/config/routes";
+import RatingWidget from "@/components/RatingWidget";
+import FAQSection from "@/components/FAQSection";
 
 export const metadata = {
   title: "About",
@@ -83,6 +85,8 @@ export default function AboutPage() {
           </p>
         </div>
       </div>
+      <FAQSection path="/about" />
+      <RatingWidget name="About Naukari Tools" pageType="WebPage" description="Learn about Naukari Tools - the high-trust, minimalist, local-first utility workspace for civil service candidates." />
     </div>
   );
 }

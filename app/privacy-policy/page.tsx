@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft, Shield, Lock, Cpu, EyeOff } from "lucide-react";
 import { routes } from "@/config/routes";
+import RatingWidget from "@/components/RatingWidget";
+import FAQSection from "@/components/FAQSection";
 
 export const metadata = {
   title: "Privacy Policy",
@@ -83,6 +85,8 @@ export default function PrivacyPolicyPage() {
           </p>
         </section>
       </div>
+      <FAQSection path="/privacy-policy" />
+      <RatingWidget name="Privacy Policy - Naukari Tools" pageType="WebPage" description="Understand our privacy practices. Naukari Tools operates local-first inside your browser with zero server file uploads." />
     </div>
   );
 }
