@@ -179,7 +179,7 @@ export default function DocumentCompressor() {
           <FileArchive className="h-5 w-5" />
         </div>
         <div>
-          <h3 className="font-semibold text-lg text-slate-900 dark:text-white">Certificate Compressor</h3>
+          <h2 className="font-semibold text-lg text-slate-900 dark:text-white">Certificate Compressor</h2>
           <p className="text-xs text-slate-500 dark:text-zinc-400">Compress marksheets/caste certificates locally</p>
         </div>
       </div>

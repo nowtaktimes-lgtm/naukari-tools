@@ -133,7 +133,7 @@ export default function EligibilityEvaluator() {
             <GraduationCap className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-slate-900 dark:text-white">Eligibility Evaluator</h3>
+            <h2 className="font-semibold text-lg text-slate-900 dark:text-white">Eligibility Evaluator</h2>
             <p className="text-xs text-slate-500 dark:text-zinc-400">Evaluate matching public sector recruitment criteria</p>
           </div>
         </div>

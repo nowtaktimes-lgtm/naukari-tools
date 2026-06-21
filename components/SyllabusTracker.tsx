@@ -104,7 +104,7 @@ export default function SyllabusTracker() {
             <LayoutList className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-slate-900 dark:text-white">Syllabus & Milestones</h3>
+            <h2 className="font-semibold text-lg text-slate-900 dark:text-white">Syllabus & Milestones</h2>
             <p className="text-xs text-slate-500 dark:text-zinc-400">Track milestones and topics for competitive exams</p>
           </div>
         </div>

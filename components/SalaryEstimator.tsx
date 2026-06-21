@@ -113,7 +113,7 @@ export default function SalaryEstimator() {
             <Coins className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-slate-900 dark:text-white">7th Pay commission Estimator</h3>
+            <h2 className="font-semibold text-lg text-slate-900 dark:text-white">7th Pay commission Estimator</h2>
             <p className="text-xs text-slate-500 dark:text-zinc-400">Estimate gross salary, deductions, and allowances locally</p>
           </div>
         </div>

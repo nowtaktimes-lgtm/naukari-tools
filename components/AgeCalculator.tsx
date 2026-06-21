@@ -243,7 +243,7 @@ export default function AgeCalculator({ defaultCutoffDate = "2026-08-01", defaul
           <Calendar className="h-5 w-5" />
         </div>
         <div>
-          <h3 className="font-semibold text-lg text-slate-900 dark:text-white">Age Eligibility Console</h3>
+          <h2 className="font-semibold text-lg text-slate-900 dark:text-white">Age Eligibility Console</h2>
           <p className="text-xs text-slate-500 dark:text-zinc-400">Verified gazette age relaxation calculator</p>
         </div>
       </div>

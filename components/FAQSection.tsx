@@ -213,10 +213,10 @@ export default function FAQSection({ exam, tool, path }: FAQSectionProps) {
       />
 
       <div className="space-y-1 text-center sm:text-left mb-6">
-        <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center justify-center sm:justify-start space-x-2">
+        <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center justify-center sm:justify-start space-x-2">
           <HelpCircle className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
           <span>Frequently Asked Questions</span>
-        </h3>
+        </h2>
         <p className="text-xs text-slate-500 dark:text-zinc-400">
           Get answers to common queries about qualifications, limits, and document specifications.
         </p>

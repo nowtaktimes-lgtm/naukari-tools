@@ -145,12 +145,12 @@ export default function RootLayout({
                 <h4 className="text-xs font-semibold text-slate-800 dark:text-zinc-300 uppercase tracking-wider mb-4">Calculators</h4>
                 <ul className="space-y-2.5">
                   <li>
-                    <Link href={routes.tools.find((t) => t.slug === "age-calculator")?.path || "/tools/age-calculator"} className="text-xs text-slate-500 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors">
+                    <Link href={routes.tools.find((t) => t.slug === "age-calculator")?.path || "/tools/age-calculator"} className="text-xs text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
                       Sarkari Age Calculator
                     </Link>
                   </li>
                   <li>
-                    <Link href={routes.tools.find((t) => t.slug === "salary-calculator")?.path || "/tools/salary-calculator"} className="text-xs text-slate-500 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors">
+                    <Link href={routes.tools.find((t) => t.slug === "salary-calculator")?.path || "/tools/salary-calculator"} className="text-xs text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
                       7th Pay Commission Salary
                     </Link>
                   </li>
@@ -161,12 +161,12 @@ export default function RootLayout({
                 <h4 className="text-xs font-semibold text-slate-800 dark:text-zinc-300 uppercase tracking-wider mb-4">Evaluators</h4>
                 <ul className="space-y-2.5">
                   <li>
-                    <Link href={routes.tools.find((t) => t.slug === "eligibility-checker")?.path || "/tools/eligibility-checker"} className="text-xs text-slate-500 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors">
+                    <Link href={routes.tools.find((t) => t.slug === "eligibility-checker")?.path || "/tools/eligibility-checker"} className="text-xs text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
                       Eligibility Checker
                     </Link>
                   </li>
                   <li>
-                    <Link href={routes.tools.find((t) => t.slug === "syllabus-tracker")?.path || "/tools/syllabus-tracker"} className="text-xs text-slate-500 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors">
+                    <Link href={routes.tools.find((t) => t.slug === "syllabus-tracker")?.path || "/tools/syllabus-tracker"} className="text-xs text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
                       Syllabus Progress Tracker
                     </Link>
                   </li>
@@ -177,22 +177,22 @@ export default function RootLayout({
                 <h4 className="text-xs font-semibold text-slate-800 dark:text-zinc-300 uppercase tracking-wider mb-4">Legal</h4>
                 <ul className="space-y-2.5">
                   <li>
-                    <Link href={routes.disclaimer} className="text-xs text-slate-500 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors">
+                    <Link href={routes.disclaimer} className="text-xs text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
                       Disclaimer
                     </Link>
                   </li>
                   <li>
-                    <Link href={routes.privacyPolicy} className="text-xs text-slate-500 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors">
+                    <Link href={routes.privacyPolicy} className="text-xs text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
                       Privacy Policy
                     </Link>
                   </li>
                   <li>
-                    <Link href={routes.terms} className="text-xs text-slate-500 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors">
+                    <Link href={routes.terms} className="text-xs text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
                       Terms of Service
                     </Link>
                   </li>
                   <li>
-                    <Link href={routes.contact} className="text-xs text-slate-500 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors">
+                    <Link href={routes.contact} className="text-xs text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
                       Contact Us
                     </Link>
                   </li>
@@ -201,7 +201,7 @@ export default function RootLayout({
 
               <div>
                 <h4 className="text-xs font-semibold text-slate-800 dark:text-zinc-300 uppercase tracking-wider mb-4">Platform</h4>
-                <p className="text-xs text-slate-500 dark:text-zinc-500 leading-relaxed mb-3">
+                <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed mb-3">
                   Ad-free, tracker-free, and high-trust. All calculation rules are double-checked against official recruitment gazettes.
                 </p>
                 <div className="flex items-center space-x-2 text-xs text-indigo-600/80 dark:text-indigo-400/80">
@@ -211,7 +211,7 @@ export default function RootLayout({
               </div>
             </div>
 
-            <div className="max-w-7xl mx-auto border-t border-black/5 dark:border-white/5 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 dark:text-zinc-600">
+            <div className="max-w-7xl mx-auto border-t border-black/5 dark:border-white/5 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-600 dark:text-zinc-400">
               <p>© {new Date().getFullYear()} Naukari Tools. Built for future civil servants.</p>
               <div className="flex space-x-6 mt-4 sm:mt-0">
                 <Link href={routes.about} className="hover:text-slate-900 dark:hover:text-zinc-400 transition-colors">About</Link>

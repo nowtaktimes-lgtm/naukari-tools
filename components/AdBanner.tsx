@@ -10,7 +10,7 @@ export default function AdBanner() {
     <div className="w-full max-w-7xl mx-auto my-6 px-4">
       <div className="glass-card rounded-2xl p-4 border border-white/5 bg-white/[0.01] flex flex-col items-center justify-center min-h-[90px] relative overflow-hidden">
         {/* Sponsored tag overlay */}
-        <span className="absolute top-2 right-3 text-[9px] font-bold uppercase tracking-wider text-zinc-500 bg-zinc-950 px-1.5 py-0.5 rounded border border-white/5">
+        <span className="absolute top-2 right-3 text-[9px] font-bold uppercase tracking-wider text-zinc-400 bg-zinc-950 px-1.5 py-0.5 rounded border border-white/5">
           Sponsored
         </span>
 

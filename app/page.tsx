@@ -292,7 +292,9 @@ export default function Home() {
         {/* Search Bar fallback input */}
         <form onSubmit={handleSearch} className="max-w-md mx-auto pt-4">
           <div className="relative flex items-center">
+            <label htmlFor="search-input" className="sr-only">Search target exam</label>
             <input
+              id="search-input"
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -334,8 +336,8 @@ export default function Home() {
                 <Calendar className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="font-semibold text-lg text-slate-900 dark:text-white">Sarkari Age Calculator</h3>
-                <p className="text-xs text-slate-500 dark:text-zinc-400">Evaluate exact age limit parameters and relaxations</p>
+                <h2 className="font-semibold text-lg text-slate-900 dark:text-white">Sarkari Age Calculator</h2>
+                <p className="text-xs text-slate-550 dark:text-zinc-400">Evaluate exact age limit parameters and relaxations</p>
               </div>
             </div>
             <Link
@@ -352,8 +354,9 @@ export default function Home() {
             {/* Input Form */}
             <div className="space-y-4 bg-slate-100/50 dark:bg-white/[0.01] border border-black/5 dark:border-white/5 rounded-2xl p-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-500 dark:text-zinc-400 mb-1.5 uppercase tracking-wider">Date of Birth</label>
+                <label htmlFor="dob-input" className="block text-xs font-semibold text-slate-655 dark:text-zinc-350 mb-1.5 uppercase tracking-wider">Date of Birth</label>
                 <input
+                  id="dob-input"
                   type="date"
                   value={dob}
                   onChange={(e) => setDob(e.target.value)}
@@ -362,8 +365,9 @@ export default function Home() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-500 dark:text-zinc-400 mb-1.5 uppercase tracking-wider">Cutoff Date</label>
+                <label htmlFor="cutoff-input" className="block text-xs font-semibold text-slate-655 dark:text-zinc-350 mb-1.5 uppercase tracking-wider">Cutoff Date</label>
                 <input
+                  id="cutoff-input"
                   type="date"
                   value={cutoffDate}
                   onChange={(e) => setCutoffDate(e.target.value)}
@@ -414,24 +418,24 @@ export default function Home() {
 
                     <div className="border-t border-black/5 dark:border-white/5 pt-3 space-y-2">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-slate-500 dark:text-zinc-400">UPSC Eligibility:</span>
+                        <span className="text-slate-655 dark:text-zinc-350">UPSC Eligibility:</span>
                         <span
                           className={`font-semibold px-2 py-0.5 rounded ${
                             ageResult.isEligibleUPSC
-                              ? "text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
-                              : "text-red-600 dark:text-red-400 bg-red-500/10 border border-red-500/20"
+                              ? "text-emerald-700 dark:text-emerald-350 bg-emerald-500/10 border border-emerald-500/20"
+                              : "text-red-700 dark:text-red-350 bg-red-500/10 border border-red-500/20"
                           }`}
                         >
                           {ageResult.isEligibleUPSC ? "ELIGIBLE" : "INELIGIBLE"}
                         </span>
                       </div>
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-slate-500 dark:text-zinc-400">SSC CGL (30 yrs max):</span>
+                        <span className="text-slate-655 dark:text-zinc-350">SSC CGL (30 yrs max):</span>
                         <span
                           className={`font-semibold px-2 py-0.5 rounded ${
                             ageResult.isEligibleSSC
-                              ? "text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
-                              : "text-red-600 dark:text-red-400 bg-red-500/10 border border-red-500/20"
+                              ? "text-emerald-700 dark:text-emerald-350 bg-emerald-500/10 border border-emerald-500/20"
+                              : "text-red-700 dark:text-red-350 bg-red-500/10 border border-red-500/20"
                           }`}
                         >
                           {ageResult.isEligibleSSC ? "ELIGIBLE" : "INELIGIBLE"}
@@ -472,18 +476,19 @@ export default function Home() {
                 Salary
               </span>
             </div>
-            <h3 className="font-semibold text-lg text-slate-900 dark:text-white mt-3">7th Pay Estimator</h3>
-            <p className="text-xs text-slate-500 dark:text-zinc-400">Simulate Central Govt Level Pay allowances</p>
+            <h2 className="font-semibold text-lg text-slate-900 dark:text-white mt-3">7th Pay Estimator</h2>
+            <p className="text-xs text-slate-550 dark:text-zinc-400">Simulate Central Govt Level Pay allowances</p>
           </div>
 
           {/* Interactive Calculator Body */}
           <div className="my-6 space-y-4">
             <div>
-              <div className="flex justify-between text-xs font-semibold text-slate-500 dark:text-zinc-400 mb-1.5">
+              <label htmlFor="pay-level-input" className="flex justify-between text-xs font-semibold text-slate-655 dark:text-zinc-350 mb-1.5">
                 <span>PAY MATRIX LEVEL</span>
-                <span className="text-indigo-600 dark:text-indigo-400">LEVEL {payLevel}</span>
-              </div>
+                <span className="text-indigo-600 dark:text-indigo-400 font-bold">LEVEL {payLevel}</span>
+              </label>
               <input
+                id="pay-level-input"
                 type="range"
                 min="1"
                 max="10"
@@ -491,7 +496,7 @@ export default function Home() {
                 onChange={(e) => setPayLevel(parseInt(e.target.value))}
                 className="w-full accent-indigo-500 bg-slate-200 dark:bg-zinc-800 rounded-lg appearance-none h-1.5 cursor-pointer"
               />
-              <div className="flex justify-between text-[10px] text-slate-400 dark:text-zinc-650 px-0.5 mt-1 font-mono">
+              <div className="flex justify-between text-[10px] text-slate-600 dark:text-zinc-450 px-0.5 mt-1 font-mono">
                 <span>L1 (PEON)</span>
                 <span>L7 (INSPECTOR)</span>
                 <span>L10</span>
@@ -542,7 +547,11 @@ export default function Home() {
                 ₹{salaryDetails.net.toLocaleString()}
               </div>
             </div>
-            <Link href={routes.tools.find((t) => t.slug === "salary-calculator")?.path || "/tools/salary-calculator"} className="h-8 w-8 rounded-lg bg-white hover:bg-slate-100 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-black/10 dark:border-white/10 flex items-center justify-center text-slate-800 dark:text-white transition-colors">
+            <Link
+              href={routes.tools.find((t) => t.slug === "salary-calculator")?.path || "/tools/salary-calculator"}
+              aria-label="Open 7th Pay Salary Calculator"
+              className="h-8 w-8 rounded-lg bg-white hover:bg-slate-100 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-black/10 dark:border-white/10 flex items-center justify-center text-slate-800 dark:text-white transition-colors"
+            >
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -562,13 +571,13 @@ export default function Home() {
                 <LayoutList className="h-5 w-5" />
               </div>
               {/* Radial Progress indicator */}
-              <div className="flex items-center space-x-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-mono">
+              <div className="flex items-center space-x-1.5 text-xs text-emerald-750 dark:text-emerald-350 font-mono">
                 <TrendingUp className="h-3.5 w-3.5" />
                 <span>{progressPercent}% Done</span>
               </div>
             </div>
-            <h3 className="font-semibold text-lg text-slate-900 dark:text-white mt-3">Syllabus & Prep Tracker</h3>
-            <p className="text-xs text-slate-500 dark:text-zinc-400">Organize and monitor subject-wise milestones</p>
+            <h2 className="font-semibold text-lg text-slate-900 dark:text-white mt-3">Syllabus & Prep Tracker</h2>
+            <p className="text-xs text-slate-550 dark:text-zinc-400">Organize and monitor subject-wise milestones</p>
           </div>
 
           {/* Task List */}
@@ -594,7 +603,7 @@ export default function Home() {
                 >
                   <CheckCircle2 className="h-3 w-3" />
                 </div>
-                <span className={`text-xs ${item.done ? "text-slate-400 dark:text-zinc-500 line-through" : "text-slate-700 dark:text-zinc-300"}`}>
+                <span className={`text-xs ${item.done ? "text-slate-500 dark:text-zinc-450 line-through" : "text-slate-700 dark:text-zinc-300"}`}>
                   {item.text}
                 </span>
               </button>
@@ -635,15 +644,16 @@ export default function Home() {
                 Evaluator
               </span>
             </div>
-            <h3 className="font-semibold text-lg text-slate-900 dark:text-white mt-3">Eligibility Evaluator</h3>
-            <p className="text-xs text-slate-500 dark:text-zinc-400">Verify compatibilities based on degree & marks</p>
+            <h2 className="font-semibold text-lg text-slate-900 dark:text-white mt-3">Eligibility Evaluator</h2>
+            <p className="text-xs text-slate-550 dark:text-zinc-400">Verify compatibilities based on degree & marks</p>
           </div>
 
           {/* Interactive Inputs */}
           <div className="my-6 space-y-4">
             <div>
-              <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-550 uppercase tracking-wider mb-1">Highest Qualification</label>
+              <label htmlFor="qualification-select" className="block text-[10px] font-bold text-slate-655 dark:text-zinc-350 uppercase tracking-wider mb-1">Highest Qualification</label>
               <select
+                id="qualification-select"
                 value={education}
                 onChange={(e) => setEducation(e.target.value)}
                 className="w-full bg-white dark:bg-zinc-950 border border-black/10 dark:border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 dark:text-white focus:outline-none focus:border-blue-500/50"
@@ -655,11 +665,12 @@ export default function Home() {
             </div>
 
             <div>
-              <div className="flex justify-between text-[10px] font-bold text-slate-500 dark:text-zinc-550 mb-1">
+              <label htmlFor="percentage-input" className="flex justify-between text-[10px] font-bold text-slate-655 dark:text-zinc-350 mb-1">
                 <span>GRADUATION / 12TH SCORE</span>
-                <span className="text-blue-600 dark:text-blue-400">{percentage}%</span>
-              </div>
+                <span className="text-blue-600 dark:text-blue-400 font-bold">{percentage}%</span>
+              </label>
               <input
+                id="percentage-input"
                 type="range"
                 min="40"
                 max="100"
@@ -699,8 +710,8 @@ export default function Home() {
               <BookOpen className="h-3.5 w-3.5" />
               <span>Programmatic SEO Mapped Hubs</span>
             </div>
-            <h3 className="font-semibold text-lg text-slate-900 dark:text-white">Interactive Utility Map</h3>
-            <p className="text-xs text-slate-500 dark:text-zinc-400">
+            <h2 className="font-semibold text-lg text-slate-900 dark:text-white">Interactive Utility Map</h2>
+            <p className="text-xs text-slate-550 dark:text-zinc-400">
               Each utility compiles real-time rules, allowances, and relaxation structures. Navigate directly to dynamic utility pathways for deeper calculations and personalized reports.
             </p>
           </div>
@@ -739,7 +750,7 @@ export default function Home() {
 
       {/* Trust Signpost Section */}
       <section className="max-w-4xl mx-auto rounded-3xl border border-black/5 dark:border-white/5 bg-slate-100/30 dark:bg-zinc-950/20 px-8 py-10 text-center space-y-4">
-        <h3 className="font-semibold text-lg text-slate-900 dark:text-white">How Naukari Tools Double-Checks Calculation Parameters</h3>
+        <h2 className="font-semibold text-lg text-slate-900 dark:text-white">How Naukari Tools Double-Checks Calculation Parameters</h2>
         <p className="text-xs text-slate-500 dark:text-zinc-400 leading-relaxed max-w-2xl mx-auto">
           Age limits and qualifications for government jobs are historically complex, varying widely between agencies (UPSC, SSC, Railway Board) and category classes (OBC, SC, ST, EWS). Naukari Tools utilizes verified mathematical logic mapped directly to Gazette notifications to guarantee precise estimations.
         </p>
