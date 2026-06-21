@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import imageCompression from "browser-image-compression";
-import { jsPDF } from "jspdf";
 import { 
   FileArchive, 
   Upload, 
@@ -60,6 +58,8 @@ export default function DocumentCompressor() {
     setErrorMsg(null);
 
     try {
+      const { default: imageCompression } = await import("browser-image-compression");
+      const { jsPDF } = await import("jspdf");
       // Step 1: Compress the image using browser-image-compression
       // Allocate some buffer (e.g. 10%) for PDF metadata wrapping if PDF output is selected
       const sizeBuffer = outputFormat === "pdf" ? 0.85 : 0.95;

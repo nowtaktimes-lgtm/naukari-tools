@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import imageCompression from "browser-image-compression";
 import { 
   Upload, 
   RotateCw, 
@@ -109,6 +108,7 @@ export default function ClientImageResizer({ defaultExamSlug, defaultResizeMode 
     setIsProcessing(true);
 
     try {
+      const { default: imageCompression } = await import("browser-image-compression");
       // Step 1: Load image onto canvas to apply Rotation & Stamp overlay
       const image = new Image();
       image.src = previewUrl;

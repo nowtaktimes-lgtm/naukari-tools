@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { jsPDF } from "jspdf";
 import { 
   Calendar, 
   Printer, 
@@ -120,7 +119,8 @@ export default function AgeCalculator({ defaultCutoffDate = "2026-08-01", defaul
   }, [performCalculation]);
 
   // Export PDF Report
-  const generatePDF = () => {
+  const generatePDF = async () => {
+    const { jsPDF } = await import("jspdf");
     const doc = new jsPDF({
       orientation: "portrait",
       unit: "mm",
