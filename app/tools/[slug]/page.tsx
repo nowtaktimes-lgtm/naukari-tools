@@ -4,12 +4,33 @@ import Link from "next/link";
 import { toolsList, routes } from "@/config/routes";
 import examsData from "@/data/exams.json";
 import { ExamSEODB } from "@/types/exam";
-import AgeCalculator from "@/components/AgeCalculator";
-import ClientImageResizer from "@/components/ClientImageResizer";
-import DocumentCompressor from "@/components/DocumentCompressor";
-import SalaryEstimator from "@/components/SalaryEstimator";
-import EligibilityEvaluator from "@/components/EligibilityEvaluator";
-import SyllabusTracker from "@/components/SyllabusTracker";
+import dynamic from "next/dynamic";
+
+const AgeCalculator = dynamic(() => import("@/components/AgeCalculator"), {
+  loading: () => <div className="animate-pulse h-96 bg-slate-100 dark:bg-zinc-900 rounded-3xl" />,
+  ssr: false,
+});
+const ClientImageResizer = dynamic(() => import("@/components/ClientImageResizer"), {
+  loading: () => <div className="animate-pulse h-[500px] bg-slate-100 dark:bg-zinc-900 rounded-3xl" />,
+  ssr: false,
+});
+const DocumentCompressor = dynamic(() => import("@/components/DocumentCompressor"), {
+  loading: () => <div className="animate-pulse h-96 bg-slate-100 dark:bg-zinc-900 rounded-3xl" />,
+  ssr: false,
+});
+const SalaryEstimator = dynamic(() => import("@/components/SalaryEstimator"), {
+  loading: () => <div className="animate-pulse h-96 bg-slate-100 dark:bg-zinc-900 rounded-3xl" />,
+  ssr: false,
+});
+const EligibilityEvaluator = dynamic(() => import("@/components/EligibilityEvaluator"), {
+  loading: () => <div className="animate-pulse h-96 bg-slate-100 dark:bg-zinc-900 rounded-3xl" />,
+  ssr: false,
+});
+const SyllabusTracker = dynamic(() => import("@/components/SyllabusTracker"), {
+  loading: () => <div className="animate-pulse h-96 bg-slate-100 dark:bg-zinc-900 rounded-3xl" />,
+  ssr: false,
+});
+
 import TrustBadges from "@/components/TrustBadges";
 import SemanticSEOText from "@/components/SemanticSEOText";
 import AdBanner from "@/components/AdBanner";

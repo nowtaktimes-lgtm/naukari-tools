@@ -434,6 +434,8 @@ export default function ClientImageResizer({ defaultExamSlug, defaultResizeMode 
                       src={processedUrl} 
                       alt="Processed Output" 
                       className="object-contain max-h-[140px]"
+                      width={300}
+                      height={140}
                     />
                   </div>
                   <div className="text-[10px] text-slate-500 dark:text-zinc-400 font-mono">
@@ -449,6 +451,8 @@ export default function ClientImageResizer({ defaultExamSlug, defaultResizeMode 
                       alt="Original Preview" 
                       className="object-contain max-h-[140px]"
                       style={{ transform: `rotate(${rotation}deg)` }}
+                      width={300}
+                      height={140}
                     />
                   </div>
                   <div className="text-[10px] text-slate-550 dark:text-zinc-500 font-mono">
