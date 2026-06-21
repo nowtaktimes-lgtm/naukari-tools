@@ -54,6 +54,30 @@ export const toolsList: RouteInfo[] = [
     iconName: 'FileArchive',
     badge: 'Exclusive',
   },
+  {
+    slug: 'photo-resizer-in-kb',
+    path: '/tools/photo-resizer-in-kb',
+    name: 'KB Photo Resizer',
+    description: 'Compress and resize candidate photos locally to 20kb, 50kb, 100kb sizes matching online form guidelines.',
+    iconName: 'RotateCw',
+    badge: 'Utility',
+  },
+  {
+    slug: 'ssc-signature-compressor-20kb',
+    path: '/tools/ssc-signature-compressor-20kb',
+    name: 'SSC Signature Resizer & Compressor',
+    description: 'Resize and compress candidate signatures to under 20KB matching official SSC requirements.',
+    iconName: 'FileArchive',
+    badge: 'SSC',
+  },
+  {
+    slug: 'rrb-signature-resizer-10kb',
+    path: '/tools/rrb-signature-resizer-10kb',
+    name: 'RRB Signature Resizer & Compressor',
+    description: 'Resize and compress candidate signatures to under 10KB/20KB matching official Railway RRB requirements.',
+    iconName: 'FileArchive',
+    badge: 'Railway',
+  },
 ];
 
 export const routes = {

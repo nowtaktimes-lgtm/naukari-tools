@@ -18,9 +18,10 @@ import { ExamSEODB } from "@/types/exam";
 
 interface ClientImageResizerProps {
   defaultExamSlug?: string;
+  defaultResizeMode?: "photo" | "signature";
 }
 
-export default function ClientImageResizer({ defaultExamSlug }: ClientImageResizerProps) {
+export default function ClientImageResizer({ defaultExamSlug, defaultResizeMode = "photo" }: ClientImageResizerProps) {
   const exams: ExamSEODB[] = examsData as ExamSEODB[];
 
   // File states
@@ -29,6 +30,9 @@ export default function ClientImageResizer({ defaultExamSlug }: ClientImageResiz
   const [processedFile, setProcessedFile] = useState<File | null>(null);
   const [processedUrl, setProcessedUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // Resize mode
+  const [resizeMode, setResizeMode] = useState<"photo" | "signature">(defaultResizeMode);
 
   // Resize / Stamp parameters
   const [selectedExamSlug, setSelectedExamSlug] = useState(defaultExamSlug || exams[0]?.slug || "");
@@ -47,19 +51,29 @@ export default function ClientImageResizer({ defaultExamSlug }: ClientImageResiz
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Update target dimensions when exam changes
+  // Update target dimensions when exam or mode changes
   const currentExam = exams.find((e) => e.slug === selectedExamSlug);
   useEffect(() => {
     if (currentExam) {
-      // Parse dimensions e.g. "275x354 px"
-      const dims = currentExam.photoDimensions.replace(" px", "").split("x");
-      if (dims.length === 2) {
-        setTargetWidth(parseInt(dims[0]));
-        setTargetHeight(parseInt(dims[1]));
+      if (resizeMode === "photo") {
+        // Parse dimensions e.g. "275x354 px"
+        const dims = currentExam.photoDimensions.replace(" px", "").split("x");
+        if (dims.length === 2) {
+          setTargetWidth(parseInt(dims[0]));
+          setTargetHeight(parseInt(dims[1]));
+        }
+        setMaxKb(currentExam.photoMaxKb);
+      } else {
+        // Parse dimensions e.g. "140x60 px"
+        const dims = currentExam.signatureDimensions.replace(" px", "").split("x");
+        if (dims.length === 2) {
+          setTargetWidth(parseInt(dims[0]));
+          setTargetHeight(parseInt(dims[1]));
+        }
+        setMaxKb(currentExam.signatureMaxKb);
       }
-      setMaxKb(currentExam.photoMaxKb);
     }
-  }, [selectedExamSlug, currentExam]);
+  }, [selectedExamSlug, currentExam, resizeMode]);
 
   // Show Custom Toast
   const triggerToast = (msg: string) => {
@@ -274,7 +288,9 @@ export default function ClientImageResizer({ defaultExamSlug }: ClientImageResiz
           />
           <Upload className="h-8 w-8 text-slate-400 dark:text-zinc-600" />
           <div className="text-center">
-            <span className="text-xs font-semibold text-slate-800 dark:text-white">Drag or Click to upload candidate photo</span>
+            <span className="text-xs font-semibold text-slate-800 dark:text-white">
+              Drag or Click to upload candidate {resizeMode === "photo" ? "photo" : "signature"}
+            </span>
             <p className="text-[10px] text-slate-500 dark:text-zinc-500 mt-1">Supports JPG, JPEG, PNG, WEBP. PDF/DOCX blocked.</p>
           </div>
         </div>
@@ -284,6 +300,42 @@ export default function ClientImageResizer({ defaultExamSlug }: ClientImageResiz
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Inputs & Parameters */}
             <div className="space-y-3 bg-slate-100/50 dark:bg-white/[0.01] border border-black/5 dark:border-white/5 rounded-2xl p-4">
+              
+              {/* Resize Mode Selector */}
+              <div>
+                <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-wider mb-1.5">Resize Mode</label>
+                <div className="flex bg-slate-200/50 dark:bg-zinc-950 border border-black/5 dark:border-white/5 rounded-xl p-1 relative">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setResizeMode("photo");
+                      setAddStamp(false);
+                    }}
+                    className={`flex-1 text-center py-1.5 text-xs font-semibold rounded-lg transition-all duration-200 relative ${
+                      resizeMode === "photo"
+                        ? "bg-white dark:bg-zinc-900 text-indigo-650 dark:text-indigo-400 shadow-sm"
+                        : "text-slate-500 dark:text-zinc-500 hover:text-slate-800 dark:hover:text-zinc-300"
+                    }`}
+                  >
+                    Photo Sizer
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setResizeMode("signature");
+                      setAddStamp(false);
+                    }}
+                    className={`flex-1 text-center py-1.5 text-xs font-semibold rounded-lg transition-all duration-200 relative ${
+                      resizeMode === "signature"
+                        ? "bg-white dark:bg-zinc-900 text-indigo-650 dark:text-indigo-400 shadow-sm"
+                        : "text-slate-500 dark:text-zinc-500 hover:text-slate-800 dark:hover:text-zinc-300"
+                    }`}
+                  >
+                    Signature Sizer
+                  </button>
+                </div>
+              </div>
+
               <div>
                 <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-wider mb-1">Target Exam Spec</label>
                 <select
@@ -293,7 +345,7 @@ export default function ClientImageResizer({ defaultExamSlug }: ClientImageResiz
                 >
                   {exams.map((e) => (
                     <option key={e.slug} value={e.slug}>
-                      {e.examName} ({e.photoDimensions}, Max {e.photoMaxKb}KB)
+                      {e.examName} ({resizeMode === "photo" ? e.photoDimensions : e.signatureDimensions}, Max {resizeMode === "photo" ? e.photoMaxKb : e.signatureMaxKb}KB)
                     </option>
                   ))}
                   <option value="custom">Custom Dimensions</option>
@@ -332,17 +384,18 @@ export default function ClientImageResizer({ defaultExamSlug }: ClientImageResiz
                 </div>
               )}
 
-              {/* Photo Stamp Option */}
-              <div className="border-t border-black/5 dark:border-white/5 pt-3 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-slate-700 dark:text-zinc-300 font-medium">Add Name & Date Photo Stamp</span>
-                  <input
-                    type="checkbox"
-                    checked={addStamp}
-                    onChange={(e) => setAddStamp(e.target.checked)}
-                    className="h-4 w-4 rounded border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 accent-purple-500 cursor-pointer"
-                  />
-                </div>
+              {/* Photo Stamp Option (Only for Photo mode) */}
+              {resizeMode === "photo" && (
+                <div className="border-t border-black/5 dark:border-white/5 pt-3 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-slate-700 dark:text-zinc-300 font-medium">Add Name & Date Photo Stamp</span>
+                    <input
+                      type="checkbox"
+                      checked={addStamp}
+                      onChange={(e) => setAddStamp(e.target.checked)}
+                      className="h-4 w-4 rounded border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 accent-purple-500 cursor-pointer"
+                    />
+                  </div>
 
                 {addStamp && (
                   <div className="space-y-2">
@@ -368,7 +421,8 @@ export default function ClientImageResizer({ defaultExamSlug }: ClientImageResiz
                   </div>
                 )}
               </div>
-            </div>
+            )}
+          </div>
 
             {/* Visual Preview panel */}
             <div className="flex flex-col items-center justify-center bg-slate-100/30 dark:bg-zinc-950/40 border border-black/5 dark:border-white/5 rounded-2xl p-4 space-y-3 min-h-[200px]">

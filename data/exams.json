@@ -2225,5 +2225,33 @@
     "photoDimensions": "350x450 px",
     "signatureMaxKb": 20,
     "signatureDimensions": "140x60 px"
+  },
+  {
+    "slug": "tnpsc-group-2",
+    "examName": "TNPSC Group 2",
+    "examBoard": "TNPSC",
+    "releaseDate": "2026-08-01",
+    "generalMinAge": 18,
+    "generalMaxAge": 32,
+    "obcRelaxationYears": 3,
+    "scstRelaxationYears": 5,
+    "photoMaxKb": 50,
+    "photoDimensions": "200x230 px",
+    "signatureMaxKb": 20,
+    "signatureDimensions": "140x60 px"
+  },
+  {
+    "slug": "tnpsc-group-1",
+    "examName": "TNPSC Group 1",
+    "examBoard": "TNPSC",
+    "releaseDate": "2026-07-01",
+    "generalMinAge": 21,
+    "generalMaxAge": 34,
+    "obcRelaxationYears": 3,
+    "scstRelaxationYears": 5,
+    "photoMaxKb": 50,
+    "photoDimensions": "200x230 px",
+    "signatureMaxKb": 20,
+    "signatureDimensions": "140x60 px"
   }
 ]

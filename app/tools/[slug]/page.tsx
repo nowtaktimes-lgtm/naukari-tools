@@ -269,6 +269,9 @@ export default function ToolPage({ params }: Props) {
           <div className="md:col-span-2">
             {tool.slug === "age-calculator" ? <AgeCalculator /> :
              tool.slug === "photo-resizer" ? <ClientImageResizer /> :
+             tool.slug === "photo-resizer-in-kb" ? <ClientImageResizer defaultResizeMode="photo" /> :
+             tool.slug === "ssc-signature-compressor-20kb" ? <ClientImageResizer defaultExamSlug="ssc-cgl-2026" defaultResizeMode="signature" /> :
+             tool.slug === "rrb-signature-resizer-10kb" ? <ClientImageResizer defaultExamSlug="rrb-ntpc" defaultResizeMode="signature" /> :
              tool.slug === "document-compressor" ? <DocumentCompressor /> : 
              tool.slug === "salary-calculator" ? <SalaryEstimator /> :
              tool.slug === "eligibility-checker" ? <EligibilityEvaluator /> :
