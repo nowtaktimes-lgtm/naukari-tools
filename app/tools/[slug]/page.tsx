@@ -122,23 +122,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   if (exam) {
-    const today = new Date("2026-06-15T00:00:00+05:30"); // Base reference system date
-    const release = new Date(exam.releaseDate);
-    const isLocked = today < release;
-
-    if (isLocked) {
-      return {
-        title: {
-          absolute: `Scheduled Release - ${exam.examName}`,
-        },
-        description: `The eligibility dashboard for ${exam.examName} is scheduled for release on ${exam.releaseDate}.`,
-        robots: {
-          index: false,
-          follow: true,
-        },
-      };
-    }
-
     const titleName = formatExamNameForTitle(exam.examName);
     const descName = formatExamNameForDescription(exam.examName);
 
