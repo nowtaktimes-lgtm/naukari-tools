@@ -142,7 +142,7 @@ export default function RootLayout({
               </div>
 
               <div>
-                <h4 className="text-xs font-semibold text-slate-800 dark:text-zinc-300 uppercase tracking-wider mb-4">Calculators</h4>
+                <h3 className="text-xs font-semibold text-slate-800 dark:text-zinc-300 uppercase tracking-wider mb-4">Calculators</h3>
                 <ul className="space-y-2.5">
                   <li>
                     <Link href={routes.tools.find((t) => t.slug === "age-calculator")?.path || "/tools/age-calculator"} className="text-xs text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
@@ -158,7 +158,7 @@ export default function RootLayout({
               </div>
 
               <div>
-                <h4 className="text-xs font-semibold text-slate-800 dark:text-zinc-300 uppercase tracking-wider mb-4">Evaluators</h4>
+                <h3 className="text-xs font-semibold text-slate-800 dark:text-zinc-300 uppercase tracking-wider mb-4">Evaluators</h3>
                 <ul className="space-y-2.5">
                   <li>
                     <Link href={routes.tools.find((t) => t.slug === "eligibility-checker")?.path || "/tools/eligibility-checker"} className="text-xs text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
@@ -174,7 +174,7 @@ export default function RootLayout({
               </div>
 
               <div>
-                <h4 className="text-xs font-semibold text-slate-800 dark:text-zinc-300 uppercase tracking-wider mb-4">Legal</h4>
+                <h3 className="text-xs font-semibold text-slate-800 dark:text-zinc-300 uppercase tracking-wider mb-4">Legal</h3>
                 <ul className="space-y-2.5">
                   <li>
                     <Link href={routes.disclaimer} className="text-xs text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
@@ -200,11 +200,11 @@ export default function RootLayout({
               </div>
 
               <div>
-                <h4 className="text-xs font-semibold text-slate-800 dark:text-zinc-300 uppercase tracking-wider mb-4">Platform</h4>
+                <h3 className="text-xs font-semibold text-slate-800 dark:text-zinc-300 uppercase tracking-wider mb-4">Platform</h3>
                 <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed mb-3">
                   Ad-free, tracker-free, and high-trust. All calculation rules are double-checked against official recruitment gazettes.
                 </p>
-                <div className="flex items-center space-x-2 text-xs text-indigo-600/80 dark:text-indigo-400/80">
+                <div className="flex items-center space-x-2 text-xs text-indigo-700 dark:text-indigo-350">
                   <Activity className="h-3.5 w-3.5 text-emerald-500 dark:text-emerald-400" />
                   <span>Double-checked eligibility logic</span>
                 </div>

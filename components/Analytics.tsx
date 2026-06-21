@@ -8,7 +8,7 @@ export default function Analytics() {
     <>
       {/* Cookie-free Vercel insights analytics injection block */}
       <Script
-        src="https://cdn.vercel-insights.com/v1/script.debug.js"
+        src="https://cdn.vercel-insights.com/v1/script.js"
         data-sd-id="vercel-insights"
         strategy="lazyOnload"
       />
@@ -16,9 +16,9 @@ export default function Analytics() {
       {/* Google tag (gtag.js) */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-66D4STE0CW"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
-      <Script id="google-analytics" strategy="afterInteractive">
+      <Script id="google-analytics" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

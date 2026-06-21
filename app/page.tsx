@@ -258,36 +258,21 @@ export default function Home() {
       />
       {/* Hero Section */}
       <section className="text-center max-w-3xl mx-auto space-y-6 pt-8 md:pt-16">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center space-x-2 rounded-full border border-indigo-500/30 bg-indigo-500/5 px-3 py-1 text-xs text-indigo-600 dark:text-indigo-300 backdrop-blur-sm"
-        >
+        <div className="inline-flex items-center space-x-2 rounded-full border border-indigo-500/30 bg-indigo-500/5 px-3 py-1 text-xs text-indigo-600 dark:text-indigo-300 backdrop-blur-sm animate-fade-in-up">
           <Award className="h-3.5 w-3.5" />
           <span>Calculations verified under Government Gazettes</span>
-        </motion.div>
+        </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.1] glow-text"
-        >
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.1] glow-text animate-fade-in-up animation-delay-100">
           Government Job <br />
           <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 dark:from-indigo-400 dark:via-purple-400 dark:to-indigo-500 bg-clip-text text-transparent">
             Utility Software Suite
           </span>
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-sm sm:text-base text-slate-500 dark:text-zinc-400 leading-relaxed max-w-2xl mx-auto"
-        >
+        <p className="text-sm sm:text-base text-slate-500 dark:text-zinc-400 leading-relaxed max-w-2xl mx-auto animate-fade-in-up animation-delay-200">
           Ad-free, trackless, and incredibly fast. Calculate precise age limits, simulate 7th Pay Salaries, evaluate eligibility criteria, and map out your path to selection.
-        </motion.p>
+        </p>
 
         {/* Search Bar fallback input */}
         <form onSubmit={handleSearch} className="max-w-md mx-auto pt-4">
