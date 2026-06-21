@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import {
   Calendar,
   ShieldCheck,
@@ -20,7 +19,6 @@ import {
 import { toolsList, routes } from "@/config/routes";
 import TrustBadges from "@/components/TrustBadges";
 import AdBanner from "@/components/AdBanner";
-import examsData from "@/data/exams.json";
 import { ExamSEODB } from "@/types/exam";
 
 // Define local interfaces for calculations
@@ -28,7 +26,6 @@ type Category = "General" | "OBC" | "SC" | "ST" | "PwD";
 
 export default function Home() {
   const router = useRouter();
-  const exams: ExamSEODB[] = examsData as ExamSEODB[];
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = async (e: React.FormEvent) => {
@@ -36,8 +33,11 @@ export default function Home() {
     if (!searchQuery.trim()) return;
 
     const normalizedQuery = searchQuery.toLowerCase().trim();
+    // Load exam data dynamically to keep homepage bundle light
+    const examsData = (await import("@/data/exams.json")).default as ExamSEODB[];
+    
     // Check if query matches any active exam slug or keywords
-    const matchedExam = exams.find(
+    const matchedExam = examsData.find(
       (exam) =>
         exam.slug.includes(normalizedQuery) ||
         exam.examName.toLowerCase().includes(normalizedQuery) ||
@@ -306,11 +306,8 @@ export default function Home() {
       <section id="tools" className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
         
         {/* BENTO CARD 1: Sarkari Age Calculator (span-2) */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="glass-card rounded-3xl p-6 md:col-span-2 flex flex-col justify-between relative overflow-hidden"
+        <div
+          className="glass-card rounded-3xl p-6 md:col-span-2 flex flex-col justify-between relative overflow-hidden animate-fade-in-up animation-delay-300"
         >
           <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/5 rounded-full blur-3xl -z-10" />
 
@@ -442,14 +439,11 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* BENTO CARD 2: 7th Pay Salary Estimator */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="glass-card rounded-3xl p-6 flex flex-col justify-between"
+        <div
+          className="glass-card rounded-3xl p-6 flex flex-col justify-between animate-fade-in-up animation-delay-400"
         >
           {/* Card Header */}
           <div className="space-y-1">
@@ -540,14 +534,11 @@ export default function Home() {
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-        </motion.div>
+        </div>
 
         {/* BENTO CARD 3: Syllabus & Revision Tracker */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="glass-card rounded-3xl p-6 flex flex-col justify-between"
+        <div
+          className="glass-card rounded-3xl p-6 flex flex-col justify-between animate-fade-in-up animation-delay-500"
         >
           {/* Card Header */}
           <div className="space-y-1">
@@ -610,14 +601,11 @@ export default function Home() {
               Configure Syllabus Milestones
             </Link>
           </div>
-        </motion.div>
+        </div>
 
         {/* BENTO CARD 4: Eligibility Checker */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="glass-card rounded-3xl p-6 flex flex-col justify-between"
+        <div
+          className="glass-card rounded-3xl p-6 flex flex-col justify-between animate-fade-in-up animation-delay-600"
         >
           {/* Card Header */}
           <div className="space-y-1">
@@ -678,14 +666,11 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* BENTO CARD 5: All Tools Catalog Map */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
-          className="glass-card rounded-3xl p-6 md:col-span-2 flex flex-col justify-between relative overflow-hidden"
+        <div
+          className="glass-card rounded-3xl p-6 md:col-span-2 flex flex-col justify-between relative overflow-hidden animate-fade-in-up animation-delay-700"
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl -z-10" />
 
@@ -729,7 +714,7 @@ export default function Home() {
               </Link>
             ))}
           </div>
-        </motion.div>
+        </div>
 
       </section>
 

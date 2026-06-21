@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Monitor } from "lucide-react";
-import { motion } from "framer-motion";
 
 export default function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
@@ -28,6 +27,14 @@ export default function ThemeSwitcher() {
 
   return (
     <div className="relative flex items-center p-1 bg-slate-200/50 dark:bg-zinc-950/40 border border-black/5 dark:border-white/5 rounded-xl">
+      {/* Sliding background indicator */}
+      <div
+        className={`absolute top-1 bottom-1 left-1 w-8 bg-white dark:bg-zinc-900 border border-black/[0.03] dark:border-white/5 rounded-lg shadow-sm transition-transform duration-200 ease-out z-0 ${
+          theme === "light" ? "translate-x-0" :
+          theme === "dark" ? "translate-x-8" :
+          "translate-x-16"
+        }`}
+      />
       {options.map((opt) => {
         const Icon = opt.icon;
         const isActive = theme === opt.value;
@@ -42,13 +49,6 @@ export default function ThemeSwitcher() {
             }`}
             title={`Set ${opt.label} theme`}
           >
-            {isActive && (
-              <motion.div
-                layoutId="activeTheme"
-                className="absolute inset-0 bg-white dark:bg-zinc-900 border border-black/[0.03] dark:border-white/5 rounded-lg shadow-sm -z-10"
-                transition={{ type: "spring", stiffness: 380, damping: 30 }}
-              />
-            )}
             <Icon className="h-3.5 w-3.5" />
           </button>
         );

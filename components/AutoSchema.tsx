@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { toolsList } from "@/config/routes";
-import examsData from "@/data/exams.json";
 import { ExamSEODB } from "@/types/exam";
 
 export default function AutoSchema() {
@@ -16,29 +15,23 @@ export default function AutoSchema() {
       existing.remove();
     }
 
+    const injectSchema = (schemaObj: Record<string, unknown> | null) => {
+      if (!schemaObj) return;
+      const script = document.createElement("script");
+      script.id = "auto-page-schema";
+      script.type = "application/ld+json";
+      script.innerHTML = JSON.stringify(schemaObj);
+      document.head.appendChild(script);
+    };
+
     let schema: Record<string, unknown> | null = null;
 
     // 1. Dynamic tools and exams routes under /tools/
     if (pathname.startsWith("/tools/")) {
       const slug = pathname.replace("/tools/", "");
-      const exam = (examsData as ExamSEODB[]).find((e) => e.slug === slug);
       const tool = toolsList.find((t) => t.slug === slug);
 
-      if (exam) {
-        schema = {
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          "name": `${exam.examName} Photo Resizer and Age Calculator`,
-          "applicationCategory": "EducationalApplication, Utility",
-          "operatingSystem": "Web, Windows, iOS, Android",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "INR"
-          },
-          "description": `Official ${exam.examBoard} photo and signature maker for ${exam.examName}.`
-        };
-      } else if (tool) {
+      if (tool) {
         schema = {
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
@@ -52,6 +45,29 @@ export default function AutoSchema() {
           },
           "description": tool.description
         };
+        injectSchema(schema);
+      } else {
+        // Load exam data dynamically to keep shared main bundle light
+        import("@/data/exams.json").then((mod) => {
+          const examsData = mod.default as ExamSEODB[];
+          const exam = examsData.find((e) => e.slug === slug);
+          if (exam) {
+            const examSchema = {
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": `${exam.examName} Photo Resizer and Age Calculator`,
+              "applicationCategory": "EducationalApplication, Utility",
+              "operatingSystem": "Web, Windows, iOS, Android",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "INR"
+              },
+              "description": `Official ${exam.examBoard} photo and signature maker for ${exam.examName}.`
+            };
+            injectSchema(examSchema);
+          }
+        });
       }
     } else {
       // 2. Primary static routes
@@ -107,19 +123,12 @@ export default function AutoSchema() {
         schema = {
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "name": document.title || "Naukari Tools Utility Page",
+          "name": typeof document !== "undefined" ? document.title || "Naukari Tools Utility Page" : "Naukari Tools Utility Page",
           "url": `https://naukaritools.in${pathname}`,
           "description": `Interactive educational utilities and compliance page for Naukari Tools.`
         };
       }
-    }
-
-    if (schema) {
-      const script = document.createElement("script");
-      script.id = "auto-page-schema";
-      script.type = "application/ld+json";
-      script.innerHTML = JSON.stringify(schema);
-      document.head.appendChild(script);
+      injectSchema(schema);
     }
   }, [pathname]);
 
