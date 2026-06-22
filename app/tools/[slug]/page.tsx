@@ -36,7 +36,7 @@ import SemanticSEOText from "@/components/SemanticSEOText";
 import AdBanner from "@/components/AdBanner";
 import RatingWidget from "@/components/RatingWidget";
 import FAQSection from "@/components/FAQSection";
-import { ArrowLeft, AlertTriangle } from "lucide-react";
+import { ArrowLeft, AlertTriangle, Link2, ChevronRight, Award } from "lucide-react";
 
 interface Props {
   params: {
@@ -190,11 +190,73 @@ export default function ToolPage({ params }: Props) {
   const tool = toolsList.find((t) => t.slug === params.slug);
   const exam = (examsData as ExamSEODB[]).find((e) => e.slug === params.slug);
 
+  // Related Exams calculation
+  const exams = examsData as ExamSEODB[];
+  let relatedExams: ExamSEODB[] = [];
+  if (exam) {
+    relatedExams = exams
+      .filter((e) => e.slug !== exam.slug && e.examBoard === exam.examBoard)
+      .slice(0, 5);
+
+    if (relatedExams.length < 5) {
+      const additional = exams
+        .filter((e) => e.slug !== exam.slug && e.examBoard !== exam.examBoard && !relatedExams.some((re) => re.slug === e.slug))
+        .slice(0, 5 - relatedExams.length);
+      relatedExams.push(...additional);
+    }
+  }
+
   // Time-lock validation logic
   const today = new Date("2026-06-15T00:00:00+05:30"); // Reference base system date
   const isExam = !!exam;
   const isLocked = isExam && today < new Date(exam.releaseDate);
   const exists = !!tool || (isExam && !isLocked);
+
+  // Helper render function for related exams
+  const renderRelatedExams = () => {
+    if (relatedExams.length === 0) return null;
+    return (
+      <div className="space-y-6 border-t border-black/5 dark:border-white/5 pt-10 mt-6">
+        <div className="space-y-1">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center space-x-2">
+            <Award className="h-5 w-5 text-indigo-650 dark:text-indigo-400" />
+            <span>Verify Eligibility & Resize Photos for Other Exams</span>
+          </h2>
+          <p className="text-xs text-slate-500 dark:text-zinc-400">
+            Access custom resizers, cutoff settings, and relaxations for other upcoming notifications.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {relatedExams.map((re) => (
+            <Link
+              key={re.slug}
+              href={`/tools/${re.slug}`}
+              className="glass-card rounded-2xl p-4 border border-black/5 dark:border-white/10 hover:border-indigo-500/30 flex flex-col justify-between space-y-4 hover:-translate-y-0.5 group"
+            >
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="px-2 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20 text-[9px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                    {re.examBoard}
+                  </span>
+                  <span className="text-[9px] text-slate-400 dark:text-zinc-550 font-mono font-semibold">
+                    {re.generalMinAge}-{re.generalMaxAge} Yrs
+                  </span>
+                </div>
+                <h3 className="text-xs font-bold text-slate-800 dark:text-zinc-200 group-hover:text-indigo-650 dark:group-hover:text-indigo-400 transition-colors leading-tight line-clamp-2">
+                  {re.examName}
+                </h3>
+              </div>
+              <div className="flex items-center space-x-1 text-[10px] font-semibold text-slate-400 group-hover:text-indigo-650 dark:group-hover:text-indigo-400 transition-colors pt-2 border-t border-black/5 dark:border-white/5">
+                <span>Open Tool</span>
+                <ChevronRight className="h-3 w-3 transform group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   // If locked or doesn't exist, load fallback banner and render custom master resizer
   if (!exists) {
@@ -235,6 +297,9 @@ export default function ToolPage({ params }: Props) {
             <TrustBadges layout="vertical" />
           </div>
         </div>
+
+        {/* Related Exams section */}
+        {renderRelatedExams()}
 
         {/* Dynamic SEO text & disclaimers */}
         <SemanticSEOText exam={null} />
@@ -285,6 +350,46 @@ export default function ToolPage({ params }: Props) {
              </div>}
           </div>
           <div className="space-y-6">
+            {/* Other Useful Tools Widget */}
+            <div className="glass-card rounded-3xl p-6 border border-black/5 dark:border-white/10 space-y-4">
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white uppercase tracking-wider flex items-center space-x-2">
+                <Link2 className="h-4 w-4 text-indigo-650 dark:text-indigo-400" />
+                <span>Other Useful Tools</span>
+              </h3>
+              <div className="space-y-2">
+                {toolsList
+                  .filter((t) => t.slug !== tool.slug)
+                  .map((t) => (
+                    <Link
+                      key={t.slug}
+                      href={t.path}
+                      className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-100/50 dark:hover:bg-zinc-900/40 border border-transparent hover:border-black/5 dark:hover:border-white/5 transition-all text-xs font-semibold text-slate-700 dark:text-zinc-300 hover:text-indigo-650 dark:hover:text-indigo-400 group"
+                    >
+                      <span>{t.name}</span>
+                      <ChevronRight className="h-3.5 w-3.5 transform group-hover:translate-x-0.5 transition-transform text-slate-400" />
+                    </Link>
+                  ))}
+              </div>
+            </div>
+
+            {/* Exam Directory Cross-Link Card */}
+            <div className="glass-card rounded-3xl p-6 border border-black/5 dark:border-white/10 bg-indigo-500/5 dark:bg-indigo-500/2 space-y-3">
+              <h4 className="font-bold text-sm text-slate-900 dark:text-white flex items-center space-x-2">
+                <Award className="h-4 w-4 text-indigo-650 dark:text-indigo-400" />
+                <span>Exam Specific Rules?</span>
+              </h4>
+              <p className="text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
+                Check matching age relaxation rules and photo guidelines for all Central and State government recruitment exams.
+              </p>
+              <Link
+                href={routes.exams}
+                className="w-full inline-flex items-center justify-center space-x-1.5 rounded-xl bg-indigo-650 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white font-semibold py-2.5 px-4 text-xs transition-all duration-200"
+              >
+                <span>Browse Exam Directory</span>
+                <ChevronRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+
             <TrustBadges layout="vertical" />
           </div>
         </div>
@@ -352,6 +457,9 @@ export default function ToolPage({ params }: Props) {
           <TrustBadges layout="vertical" />
         </div>
       </div>
+
+      {/* Related Exams section */}
+      {renderRelatedExams()}
 
       {/* Semantic SEO Text Panel */}
       <SemanticSEOText exam={exam} />
