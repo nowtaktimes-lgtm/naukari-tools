@@ -292,11 +292,13 @@ export default function ToolPage({ params }: Props) {
           <div className="md:col-span-2">
             <ClientImageResizer defaultExamSlug={exam?.slug} />
           </div>
-          <div className="space-y-6">
+          <div>
             <AgeCalculator defaultExamSlug={exam?.slug} />
-            <TrustBadges layout="vertical" />
           </div>
         </div>
+
+        {/* Trust Badges Banner */}
+        <TrustBadges layout="horizontal" />
 
         {/* Related Exams section */}
         {renderRelatedExams()}
